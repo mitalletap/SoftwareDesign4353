@@ -134,13 +134,9 @@ class Test {
         Scanner scanner = new Scanner(System.in);
         String userResponse = "y";
         int s1 = 0;
-
-
         do {
-
             System.out.println("Would you like to solve with lengths or points? Please type 1 for Lengths or 2 for Points");
             String inputType = scanner.nextLine();
-
             try {
                 s1 = Integer.parseInt(inputType);
             } catch (NumberFormatException nfe){
@@ -154,10 +150,6 @@ class Test {
             } else {
                 System.out.println("Please choose another selection.");
             }
-
-
-
-
         } while(userResponse == "y");
         System.out.println("Invalid Parameter(s)");
         return;
