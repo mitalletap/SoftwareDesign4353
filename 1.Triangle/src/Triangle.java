@@ -5,11 +5,32 @@
 // 4. What kind of triangle will be produced.
 
 // Created By Mital Patel.
+
 import java.util.Scanner;
+import java.lang.Math;
+
+class Point extends Triangle {
+
+    float p1, p2, p3, perimeter;
+    public Point(float point1, float point2){
+        p1 = point1;
+        p2 = point2;
+    }
+}
+
+
+
+
+
+
 
 class Triangle {
 
-    float l1, l2, l3, perimeter;
+    float l1, l2, l3;
+
+    public Triangle() {
+        // NULL
+    }
 
     public Triangle(float length1, float length2, float length3) {
         l1 = length1;
@@ -84,53 +105,136 @@ class Triangle {
         }
     }
 
+    void getArea(float l1, float l2, float l3){
+        // Herons Formula
+        double s = ((l1 + l2 + l3)/2);
+        double areaSqrt = (s*(s-l1)*(s-l2)*(s-l3));
+        System.out.println("The Area is: " + Math.pow(areaSqrt, .5));
+    }
+
 }
+
+
+
+
+
+
 
 
 class Test {
     public static void main(String[] args){
+        Scanner userScanner = new Scanner(System.in);
+        float f1=3, f2=3, f3=3;
+        int s1;
+        computeIt();
+        userScanner.close();
+    }
+
+    private static void computeIt() {
+        Scanner scanner = new Scanner(System.in);
+        String userResponse = "y";
+        int s1 = 0;
+
+
+        do {
+
+            System.out.println("Would you like to solve with lengths or points? Please type 1 for Lengths or 2 for Points");
+            String inputType = scanner.nextLine();
+
+            try {
+                s1 = Integer.parseInt(inputType);
+            } catch (NumberFormatException nfe){
+                System.out.println("Invalid Parameter(s)");
+            }
+
+            if(s1 == 1){
+                TriangleAnswer();
+            } else if (s1 == 2){
+                PointAnswer();
+            } else {
+                System.out.println("Please choose another selection.");
+            }
+
+
+
+
+        } while(userResponse == "y");
+        System.out.println("Invalid Parameter(s)");
+        return;
+    }
+
+
+
+    private static void TriangleAnswer() {
         Scanner scanner = new Scanner(System.in);
         String s1, s2, s3;
         float f1=3, f2=3, f3=3;
 
-        String userResponse = "y";
-        while(!userResponse.equals("n")){
-            System.out.println("Please enter 3 side lengths, one at a time.");
-            System.out.println("First Length:");
-            s1 = scanner.nextLine();
-            System.out.println("Second Length:");
-            s2 = scanner.nextLine();
-            System.out.println("Third Length:");
-            s3 = scanner.nextLine();
+        System.out.println("Please enter 3 side lengths, one at a time.");
+        System.out.println("First Length:");
+        s1 = scanner.nextLine();
+        System.out.println("Second Length:");
+        s2 = scanner.nextLine();
+        System.out.println("Third Length:");
+        s3 = scanner.nextLine();
 
-            try {
-                f1 = Float.parseFloat(s1);
-                f2 = Float.parseFloat(s2);
-                f3 = Float.parseFloat(s3);
-            } catch (NumberFormatException nfe){
-                System.out.println("Invalid Parameter(s)");
-                break;
-            }
-
-            Triangle t1 = new Triangle(f1, f2, f3);
-
-            if(t1.isTriangle() && t1.isValid()){
-                System.out.println("Triangle is Good");
-            } else {
-                System.out.println("Triangle is BAD");
-                break;
-            }
-
-
-            System.out.println("First Length: " + s1);
-            System.out.println("Second Length: " + s2);
-            System.out.println("Third Length: " + s3);
-            t1.compute(f1, f2, f3);
-
-            System.out.println("Would you like to compute another Triangle? 'y' or 'n'");
-            userResponse = scanner.next();
-            System.out.println("=========================================================");
+        try {
+            f1 = Float.parseFloat(s1);
+            f2 = Float.parseFloat(s2);
+            f3 = Float.parseFloat(s3);
+        } catch (NumberFormatException nfe){
+            System.out.println("Invalid Parameter(s)");
         }
+
+        Triangle t1 = new Triangle(f1, f2, f3);
+
+        if(t1.isTriangle() && t1.isValid()){
+            System.out.println("Triangle is Good");
+        } else {
+            System.out.println("Triangle is BAD");
+
+        }
+
+
+        System.out.println("First Length: " + s1);
+        System.out.println("Second Length: " + s2);
+        System.out.println("Third Length: " + s3);
+        t1.compute(f1, f2, f3);
+        t1.getArea(f1, f2, f3);
+    }
+
+
+    private static void PointAnswer() {
+        Scanner scanner = new Scanner(System.in);
+        float p1, p2, p3, p4, p5, p6;
+        System.out.println("Please enter 3 Ordered Pairs");
+        System.out.println("First Pair:");
+        p1 = scanner.nextFloat();
+        p2 = scanner.nextFloat();
+        System.out.println("Second Pair:");
+        p3 = scanner.nextFloat();
+        p4 = scanner.nextFloat();
+        System.out.println("Third Pair:");
+        p5 = scanner.nextFloat();
+        p6 = scanner.nextFloat();
+
+        Point a = new Point(p1,p2);
+        Point b = new Point(p3,p4);
+        Point c = new Point(p5,p6);
+
+
+        System.out.println("First Pair: (" + p1 + "," + p2 + ")");
+        System.out.println("Second Pair: (" + p3 + "," + p4 + ")");
+        System.out.println("Third Pair: (" + p5 + "," + p6 + ")");
+
+        float l1, l2, l3;
+        double d1 = Math.pow(((Math.pow((p3 - p1), 2) + Math.pow((p4-p2), 2))), .5);
+        double d2 = Math.pow(((Math.pow((p5 - p3), 2) + Math.pow((p6-p4), 2))), .5);
+        double d3 = Math.pow(((Math.pow((p5 - p1), 2) + Math.pow((p6-p2), 2))), .5);
+
+        // l1 = d1;
+        //Triangle t1 = new Triangle(l1, l2, l3);
+
 
     }
 }
