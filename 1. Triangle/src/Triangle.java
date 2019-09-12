@@ -140,7 +140,7 @@ class Test {
             try {
                 s1 = Integer.parseInt(inputType);
             } catch (NumberFormatException nfe){
-                System.out.println("Invalid Parameter(s)");
+                break;
             }
 
             if(s1 == 1){
@@ -174,59 +174,77 @@ class Test {
             f1 = Float.parseFloat(s1);
             f2 = Float.parseFloat(s2);
             f3 = Float.parseFloat(s3);
+
+            Triangle t1 = new Triangle(f1, f2, f3);
+            if(t1.isTriangle() && t1.isValid()){
+                System.out.println("Triangle is Good");
+            } else {
+                System.out.println("Triangle is BAD");
+
+            }
+            System.out.println("First Length: " + s1);
+            System.out.println("Second Length: " + s2);
+            System.out.println("Third Length: " + s3);
+            t1.compute(f1, f2, f3);
+            t1.getArea(f1, f2, f3);
+
         } catch (NumberFormatException nfe){
             System.out.println("Invalid Parameter(s)");
         }
 
-        Triangle t1 = new Triangle(f1, f2, f3);
 
-        if(t1.isTriangle() && t1.isValid()){
-            System.out.println("Triangle is Good");
-        } else {
-            System.out.println("Triangle is BAD");
-
-        }
-
-
-        System.out.println("First Length: " + s1);
-        System.out.println("Second Length: " + s2);
-        System.out.println("Third Length: " + s3);
-        t1.compute(f1, f2, f3);
-        t1.getArea(f1, f2, f3);
     }
 
 
     private static void PointAnswer() {
         Scanner scanner = new Scanner(System.in);
+        String s1, s2, s3, s4, s5, s6;
         float p1, p2, p3, p4, p5, p6;
         System.out.println("Please enter 3 Ordered Pairs");
         System.out.println("First Pair:");
-        p1 = scanner.nextFloat();
-        p2 = scanner.nextFloat();
+        s1 = scanner.next();
+        s2 = scanner.next();
         System.out.println("Second Pair:");
-        p3 = scanner.nextFloat();
-        p4 = scanner.nextFloat();
+        s3 = scanner.next();
+        s4 = scanner.next();
         System.out.println("Third Pair:");
-        p5 = scanner.nextFloat();
-        p6 = scanner.nextFloat();
+        s5 = scanner.next();
+        s6 = scanner.next();
 
-        Point a = new Point(p1,p2);
-        Point b = new Point(p3,p4);
-        Point c = new Point(p5,p6);
+        try {
+            p1 = Float.parseFloat(s1);
+            p2 = Float.parseFloat(s2);
+            p3 = Float.parseFloat(s3);
+            p4 = Float.parseFloat(s4);
+            p5 = Float.parseFloat(s5);
+            p6 = Float.parseFloat(s6);
 
-
-        System.out.println("First Pair: (" + p1 + "," + p2 + ")");
-        System.out.println("Second Pair: (" + p3 + "," + p4 + ")");
-        System.out.println("Third Pair: (" + p5 + "," + p6 + ")");
-
-        float l1, l2, l3;
-        double d1 = Math.pow(((Math.pow((p3 - p1), 2) + Math.pow((p4-p2), 2))), .5);
-        double d2 = Math.pow(((Math.pow((p5 - p3), 2) + Math.pow((p6-p4), 2))), .5);
-        double d3 = Math.pow(((Math.pow((p5 - p1), 2) + Math.pow((p6-p2), 2))), .5);
-
-        // l1 = d1;
-        //Triangle t1 = new Triangle(l1, l2, l3);
+            Point a = new Point(p1,p2);
+            Point b = new Point(p3,p4);
+            Point c = new Point(p5,p6);
 
 
+            System.out.println("First Pair: (" + p1 + "," + p2 + ")");
+            System.out.println("Second Pair: (" + p3 + "," + p4 + ")");
+            System.out.println("Third Pair: (" + p5 + "," + p6 + ")");
+
+            float l1, l2, l3;
+            double d1 = Math.pow(((Math.pow((p3 - p1), 2) + Math.pow((p4-p2), 2))), .5);
+            double d2 = Math.pow(((Math.pow((p5 - p3), 2) + Math.pow((p6-p4), 2))), .5);
+            double d3 = Math.pow(((Math.pow((p5 - p1), 2) + Math.pow((p6-p2), 2))), .5);
+
+            l1 = (float)d1;
+            l2 = (float)d2;
+            l3 = (float)d3;
+            System.out.println("Lengths from First to Second Point: " + l1);
+            System.out.println("Lengths from Second to Third Point: " + l2);
+            System.out.println("Lengths from First to Third Point: " + l3);
+            Triangle t1 = new Triangle(l1, l2, l3);
+            t1.compute(l1, l2, l3);
+
+
+        } catch (NumberFormatException nfe){
+            System.out.println("Invalid Parameter(s)");
+        }
     }
 }

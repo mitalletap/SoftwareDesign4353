@@ -1,7 +1,0 @@
-COSC 4353 | Assignment 1 | Triangle | 9/5/19
-
-The purpose of this program is to deterime the type of triangle given from user input. 
-Functionality includes:
-1. Determining if inputs constitute a Triangle
-2. Whether the inputs create an illegal Triangle
-3. The type of Triangle created (Equilateral, Isosceles, Scalene, or Right)
